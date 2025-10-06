@@ -1,23 +1,42 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { useFormStore } from "@/store/formStore";
 import Stepper from "@/components/Stepper";
 import PrivateDataForm from "@/components/forms/PrivateDataForm";
 import AddressWorkForm from "@/components/forms/AddressWorkForm";
 import LoanParametersForm from "@/components/forms/LoanParametersForm";
 import SummaryModal from "@/components/SummaryModal";
-import { MadeWithDyad } from "@/components/made-with-dyad";
 import { toast } from "sonner";
 
 const Index = () => {
   const { currentStep, setCurrentStep, formData, resetForm } = useFormStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const params = useParams();
+  const navigate = useNavigate();
+  const totalSteps = 3;
+
+  // Sync URL -> store on mount / when param changes
+  useEffect(() => {
+    const p = params.step ? Number(params.step) : NaN;
+    if (!isNaN(p) && p >= 1 && p <= totalSteps) {
+      if (p !== currentStep) setCurrentStep(p);
+    } else {
+      // if param is invalid, navigate to the current step
+      navigate(`/step/${currentStep}`, { replace: true });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params.step]);
 
   const handleNext = () => {
-    setCurrentStep(currentStep + 1);
+    const next = Math.min(totalSteps, currentStep + 1);
+    setCurrentStep(next);
+    navigate(`/step/${next}`);
   };
 
   const handleBack = () => {
-    setCurrentStep(currentStep - 1);
+    const prev = Math.max(1, currentStep - 1);
+    setCurrentStep(prev);
+    navigate(`/step/${prev}`);
   };
 
   const handleSubmit = async () => {
@@ -51,7 +70,8 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12">
+    <>
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12">
       <div className="max-w-2xl mx-auto px-4">
         <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8">
           <div className="text-center mb-8">
@@ -59,7 +79,7 @@ const Index = () => {
             <p className="text-gray-600">Complete all steps to apply for a loan</p>
           </div>
           
-          <Stepper currentStep={currentStep} totalSteps={3} />
+          <Stepper currentStep={currentStep} totalSteps={totalSteps} />
           
           <div className="mt-8">
             {currentStep === 1 && (
@@ -78,11 +98,8 @@ const Index = () => {
         
         <SummaryModal isOpen={isModalOpen} onClose={handleCloseModal} />
       </div>
-      
-      <div className="mt-8">
-        <MadeWithDyad />
-      </div>
     </div>
+    </>
   );
 };
 

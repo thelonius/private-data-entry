@@ -36,15 +36,9 @@ const Slider = ({
         step={step}
         value={value[0]}
         onChange={handleChange}
-        className="absolute w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-500 top-0"
       />
       <div 
-        className="absolute top-0 left-0 h-2 bg-blue-500 rounded-lg pointer-events-none"
         style={{ width: `${percentage}%` }}
-      />
-      <div 
-        className="absolute w-5 h-5 bg-white border-2 border-blue-500 rounded-full -translate-x-1/2 -translate-y-1/2 cursor-pointer shadow"
-        style={{ left: `${percentage}%`, top: '50%' }}
       />
     </div>
   );
