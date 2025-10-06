@@ -58,7 +58,9 @@ const AddressWorkForm: React.FC<AddressWorkFormProps> = ({ onBack, onNext }) => 
           onValueChange={(value) => setFormData({ workPlace: value })}
         >
           <SelectTrigger className={errors.workPlace ? "border-red-500" : ""}>
-            <SelectValue placeholder="Select your work place" />
+            <SelectValue placeholder="Select your work place">
+              {formData.workPlace || ""}
+            </SelectValue>
           </SelectTrigger>
           <SelectContent>
             {categories.map((category) => (

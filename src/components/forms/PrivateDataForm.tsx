@@ -60,6 +60,15 @@ const PrivateDataForm: React.FC<PrivateDataFormProps> = ({ onNext }) => {
     setFormData({ phoneNumber: formatted });
   };
 
+  // Function to get display text for sex
+  const getSexDisplayText = (value: string) => {
+    switch (value) {
+      case "male": return "Male";
+      case "female": return "Female";
+      default: return "";
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -118,7 +127,9 @@ const PrivateDataForm: React.FC<PrivateDataFormProps> = ({ onNext }) => {
           onValueChange={(value) => setFormData({ sex: value })}
         >
           <SelectTrigger className={errors.sex ? "border-red-500" : ""}>
-            <SelectValue placeholder="Select your sex" />
+            <SelectValue placeholder="Select your sex">
+              {getSexDisplayText(formData.sex)}
+            </SelectValue>
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="male">Male</SelectItem>

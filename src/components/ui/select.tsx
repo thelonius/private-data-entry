@@ -24,10 +24,11 @@ const Select = ({ value, onValueChange, children, className, id }: SelectProps) 
 interface SelectTriggerProps {
   className?: string;
   children: React.ReactNode;
+  placeholder?: string;
 }
 
 const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(
-  ({ className, children, ...props }, ref) => {
+  ({ className, children, placeholder, ...props }, ref) => {
     return (
       <Listbox.Button
         ref={ref}
@@ -37,7 +38,9 @@ const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(
         )}
         {...props}
       >
-        <span className="block truncate">{children}</span>
+        <span className="block truncate">
+          {children || <span className="text-gray-500">{placeholder}</span>}
+        </span>
         <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
           <ChevronUpDownIcon
             className="h-5 w-5 text-gray-400"
@@ -53,10 +56,22 @@ SelectTrigger.displayName = "SelectTrigger";
 interface SelectValueProps {
   placeholder?: string;
   children?: React.ReactNode;
+  value?: string;
 }
 
-const SelectValue = ({ placeholder, children }: SelectValueProps) => {
-  return children || <span className="text-gray-500">{placeholder}</span>;
+const SelectValue = ({ placeholder, children, value }: SelectValueProps) => {
+  // If we have a value and children, display children
+  if (children) {
+    return <span className="block truncate">{children}</span>;
+  }
+  
+  // If we have a value but no children, display the value
+  if (value) {
+    return <span className="block truncate">{value}</span>;
+  }
+  
+  // Otherwise show placeholder
+  return <span className="block truncate text-gray-500">{placeholder}</span>;
 };
 
 interface SelectContentProps {
