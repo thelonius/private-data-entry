@@ -1,6 +1,7 @@
 import React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
+import { useToast } from "@/hooks/use-toast";
 
 const ToastProvider = ({ children }: { children: React.ReactNode }) => {
   return <>{children}</>;

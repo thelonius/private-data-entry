@@ -12,7 +12,7 @@ interface AddressWorkFormProps {
 
 const AddressWorkForm: React.FC<AddressWorkFormProps> = ({ onBack, onNext }) => {
   const { formData, setFormData, categories } = useFormStore();
-  const [errors, setErrors] = useState<Record<string, string>>({};
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
     // Fetch categories if not already loaded
@@ -58,9 +58,7 @@ const AddressWorkForm: React.FC<AddressWorkFormProps> = ({ onBack, onNext }) => 
           onValueChange={(value) => setFormData({ workPlace: value })}
         >
           <SelectTrigger className={errors.workPlace ? "border-red-500" : ""}>
-            <SelectValue placeholder="Select your work place">
-              {formData.workPlace || "Select your work place"}
-            </SelectValue>
+            <SelectValue placeholder="Select your work place" />
           </SelectTrigger>
           <SelectContent>
             {categories.map((category) => (
