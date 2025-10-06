@@ -11,9 +11,9 @@ const Stepper: React.FC<StepperProps> = ({ currentStep, totalSteps }) => {
     <div className="w-full py-6">
       <div className="flex justify-between relative">
         {/* Progress line */}
-        <div className="absolute top-4 left-0 right-0 h-1 bg-gray-200 -z-10">
+        <div className="absolute top-5 left-0 right-0 h-1 bg-gray-200 -z-10">
           <div 
-            className="h-full bg-blue-500 transition-all duration-300" 
+            className="h-full bg-blue-500 transition-all duration-500 ease-in-out" 
             style={{ width: `${((currentStep - 1) / (totalSteps - 1)) * 100}%` }}
           />
         </div>
@@ -27,22 +27,25 @@ const Stepper: React.FC<StepperProps> = ({ currentStep, totalSteps }) => {
           return (
             <div key={step} className="flex flex-col items-center">
               <div className={cn(
-                "w-8 h-8 rounded-full flex items-center justify-center border-2 transition-colors",
+                "w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-300",
                 isActive 
-                  ? "bg-blue-500 border-blue-500 text-white" 
+                  ? "bg-blue-500 border-blue-500 text-white scale-110" 
                   : isCompleted
                   ? "bg-green-500 border-green-500 text-white"
                   : "bg-white border-gray-300 text-gray-500"
               )}>
                 {isCompleted ? (
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                 ) : (
-                  step
+                  <span className="font-medium">{step}</span>
                 )}
               </div>
-              <span className="mt-2 text-sm font-medium text-gray-600">
+              <span className={cn(
+                "mt-2 text-sm font-medium",
+                isActive ? "text-blue-600" : "text-gray-600"
+              )}>
                 Step {step}
               </span>
             </div>

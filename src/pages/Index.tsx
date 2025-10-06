@@ -34,6 +34,7 @@ const Index = () => {
       
       if (response.ok) {
         setIsModalOpen(true);
+        toast.success("Application submitted successfully!");
       } else {
         toast.error("Failed to submit application");
       }
@@ -50,11 +51,13 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12">
       <div className="max-w-2xl mx-auto px-4">
-        <div className="bg-white rounded-xl shadow-md p-6 md:p-8">
-          <h1 className="text-3xl font-bold text-center mb-2">Loan Application</h1>
-          <p className="text-gray-600 text-center mb-8">Complete all steps to apply for a loan</p>
+        <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8">
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-bold text-gray-800 mb-2">Loan Application</h1>
+            <p className="text-gray-600">Complete all steps to apply for a loan</p>
+          </div>
           
           <Stepper currentStep={currentStep} totalSteps={3} />
           

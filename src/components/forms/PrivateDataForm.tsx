@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 
 interface PrivateDataFormProps {
   onNext: () => void;
@@ -88,7 +89,17 @@ const PrivateDataForm: React.FC<PrivateDataFormProps> = ({ onNext }) => {
       </div>
       
       <div className="space-y-2">
-        <Label htmlFor="phoneNumber">Phone Number *</Label>
+        <div className="flex items-center justify-between">
+          <Label htmlFor="phoneNumber">Phone Number *</Label>
+          <Tooltip>
+            <TooltipTrigger>
+              <span className="text-xs text-gray-500 underline cursor-help">Format info</span>
+            </TooltipTrigger>
+            <TooltipContent>
+              Format: 0XXX XXX XXX
+            </TooltipContent>
+          </Tooltip>
+        </div>
         <Input
           id="phoneNumber"
           type="tel"
@@ -98,7 +109,6 @@ const PrivateDataForm: React.FC<PrivateDataFormProps> = ({ onNext }) => {
           className={errors.phoneNumber ? "border-red-500" : ""}
         />
         {errors.phoneNumber && <p className="text-red-500 text-sm">{errors.phoneNumber}</p>}
-        <p className="text-sm text-gray-500">Format: 0XXX XXX XXX</p>
       </div>
       
       <div className="space-y-2">
