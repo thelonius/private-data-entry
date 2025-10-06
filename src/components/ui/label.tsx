@@ -8,13 +8,16 @@ const labelVariants = cva(
 
 export interface LabelProps
   extends React.LabelHTMLAttributes<HTMLLabelElement>,
-    VariantProps<typeof labelVariants> {}
+    VariantProps<typeof labelVariants> {
+  htmlFor?: string;
+}
 
 const Label = React.forwardRef<HTMLLabelElement, LabelProps>(
-  ({ className, ...props }, ref) => (
+  ({ className, htmlFor, ...props }, ref) => (
     <label
       ref={ref}
       className={cn(labelVariants({ className }))}
+      htmlFor={htmlFor}
       {...props}
     />
   )

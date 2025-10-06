@@ -11,15 +11,16 @@ const TooltipContext = createContext<TooltipContextType | null>(null);
 
 interface TooltipProps {
   children: React.ReactNode;
+  id?: string;
 }
 
-const Tooltip = ({ children }: TooltipProps) => {
+const Tooltip = ({ children, id }: TooltipProps) => {
   const [open, setOpen] = useState(false);
   const triggerRef = React.useRef<HTMLDivElement>(null);
 
   return (
     <TooltipContext.Provider value={{ open, setOpen, triggerRef }}>
-      {children}
+      <div id={id}>{children}</div>
     </TooltipContext.Provider>
   );
 };

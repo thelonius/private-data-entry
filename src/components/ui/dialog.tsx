@@ -7,12 +7,13 @@ interface DialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   children: React.ReactNode;
+  id?: string;
 }
 
-const Dialog = ({ open, onOpenChange, children }: DialogProps) => {
+const Dialog = ({ open, onOpenChange, children, id }: DialogProps) => {
   return (
     <Transition appear show={open} as={Fragment}>
-      <HeadlessDialog as="div" className="relative z-50" onClose={onOpenChange}>
+      <HeadlessDialog as="div" className="relative z-50" onClose={onOpenChange} id={id}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"

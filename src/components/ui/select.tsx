@@ -8,12 +8,13 @@ interface SelectProps {
   onValueChange: (value: string) => void;
   children: React.ReactNode;
   className?: string;
+  id?: string;
 }
 
-const Select = ({ value, onValueChange, children, className }: SelectProps) => {
+const Select = ({ value, onValueChange, children, className, id }: SelectProps) => {
   return (
     <Listbox value={value} onChange={onValueChange}>
-      <div className={cn("relative", className)}>
+      <div className={cn("relative", className)} id={id}>
         {children}
       </div>
     </Listbox>
