@@ -1,4 +1,3 @@
-import React from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Toast, ToastClose, ToastDescription, ToastProvider, ToastTitle } from "@/components/ui/toast";
 

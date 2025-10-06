@@ -108,7 +108,9 @@ const PrivateDataForm: React.FC<PrivateDataFormProps> = ({ onNext }) => {
           onValueChange={(value) => setFormData({ sex: value })}
         >
           <SelectTrigger className={errors.sex ? "border-red-500" : ""}>
-            <SelectValue placeholder="Select your sex" />
+            <SelectValue placeholder="Select your sex">
+              {formData.sex === "male" ? "Male" : formData.sex === "female" ? "Female" : "Select your sex"}
+            </SelectValue>
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="male">Male</SelectItem>
